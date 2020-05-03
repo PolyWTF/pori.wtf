@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `poriのブログ`,
+    title: `Pori's blog`,
     author: {
       name: `Pori`,
       summary: `TypeScript React`,
