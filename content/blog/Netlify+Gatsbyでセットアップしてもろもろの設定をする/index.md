@@ -1,7 +1,7 @@
 ---
 title: Netlify + Gatsbyでセットアップしてもろもろの設定をする
 date: 2020-05-03 22:04:02
-description: めちゃくちゃ爆速でビビった
+description: めちゃくちゃ爆速
 ---
 
 ふとブログを作ってみたいと思ったので以前から気になっていたNetlify + Gatsbyでブログを構築してみることにしました。
@@ -14,7 +14,8 @@ Gatsbyのテンプレートを引っ張ってくる
 `gatsby new folderName https://github.com/gatsbyjs/gatsby-starter-blog`
 
 実行  
-`gatsby develop`
+`gatsby develop`  
+[http://localhost:8000](http://localhost:8000/)を開く
 
 ![実行結果](gatsby-first-develop.png)  
 これだけで一通りブログを構築できました。

@@ -1,11 +1,11 @@
 module.exports = {
   siteMetadata: {
-    title: `Pori's blog`,
+    title: `ぽりろぐ`,
     author: {
       name: `Pori`,
       summary: `TypeScript React`,
     },
-    description: `趣味でプログラム書いてる変な人です。`,
+    description: `趣味でプログラム書いてる変な人のブログ`,
     siteUrl: `https://pori.wtf`,
     social: {
       twitter: `PoriWTF`,
