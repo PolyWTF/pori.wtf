@@ -1,86 +1,108 @@
 module.exports = {
   siteMetadata: {
-    title: `ぽりろぐ`,
+    title: 'ぽりろぐ',
     author: {
-      name: `Pori`,
-      summary: `TypeScript React`,
+      name: 'Pori',
+      summary: 'TypeScript React',
     },
-    description: `趣味でプログラム書いてる変な人のブログ`,
-    siteUrl: `https://pori.wtf`,
+    description: '趣味でプログラム書いてる変な人のブログ',
+    siteUrl: 'https://pori.wtf',
     social: {
-      twitter: `PoriWTF`,
+      twitter: 'PoriWTF',
     },
   },
   plugins: [
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: 'gatsby-source-filesystem',
       options: {
         path: `${__dirname}/content/blog`,
-        name: `blog`,
+        name: 'blog',
       },
     },
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: 'gatsby-source-filesystem',
       options: {
         path: `${__dirname}/content/assets`,
-        name: `assets`,
+        name: 'assets',
       },
     },
     {
-      resolve: `gatsby-transformer-remark`,
+      resolve: 'gatsby-transformer-remark',
       options: {
         plugins: [
           {
-            resolve: `gatsby-remark-images`,
+            resolve: 'gatsby-remark-images',
             options: {
               maxWidth: 590,
             },
           },
           {
-            resolve: `gatsby-remark-responsive-iframe`,
+            resolve: 'gatsby-remark-responsive-iframe',
             options: {
-              wrapperStyle: `margin-bottom: 1.0725rem`,
+              wrapperStyle: 'margin-bottom: 1.0725rem',
             },
           },
-          `gatsby-remark-prismjs`,
-          `gatsby-remark-copy-linked-files`,
-          `gatsby-remark-smartypants`,
+          'gatsby-remark-prismjs',
+          'gatsby-remark-copy-linked-files',
+          'gatsby-remark-smartypants',
           {
-            resolve: `gatsby-remark-mathjax-ssr`,
-            options: {
-            }
-          }
+            resolve: 'gatsby-remark-mathjax-ssr',
+            options: {},
+          },
         ],
       },
     },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-sharp',
+    'gatsby-plugin-feed',
     {
-      resolve: `gatsby-plugin-google-analytics`,
+      resolve: 'gatsby-plugin-manifest',
       options: {
-        //trackingId: `ADD YOUR TRACKING ID HERE`,
+        name: 'Gatsby Starter Blog',
+        short_name: 'GatsbyJS',
+        start_url: '/',
+        background_color: '#ffffff',
+        theme_color: '#663399',
+        display: 'minimal-ui',
+        icon: 'content/assets/gatsby-icon.png',
       },
     },
-    `gatsby-plugin-feed`,
+    'gatsby-plugin-react-helmet',
     {
-      resolve: `gatsby-plugin-manifest`,
+      resolve: 'gatsby-plugin-typography',
       options: {
-        name: `Gatsby Starter Blog`,
-        short_name: `GatsbyJS`,
-        start_url: `/`,
-        background_color: `#ffffff`,
-        theme_color: `#663399`,
-        display: `minimal-ui`,
-        icon: `content/assets/gatsby-icon.png`,
+        pathToConfigModule: 'src/utils/typography',
       },
     },
-    `gatsby-plugin-react-helmet`,
     {
-      resolve: `gatsby-plugin-typography`,
+      resolve: 'gatsby-plugin-typescript',
+      isTSX: true,
+    },
+    {
+      resolve: 'gatsby-plugin-graphql-codegen',
       options: {
-        pathToConfigModule: `src/utils/typography`,
+        fileName: 'types/graphql-types.d.ts',
       },
     },
+    {
+      resolve: 'gatsby-plugin-google-fonts',
+      options: {
+        fonts: [
+          'Noto Sans JP',
+          // you can also specify font weights and styles
+        ],
+        display: 'swap',
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-layout',
+      options: {
+        component: require.resolve(
+          './src/plugins/gatsby-plugin-layout/TopLayout.tsx'
+        ),
+      },
+    },
+    'gatsby-plugin-material-ui',
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,

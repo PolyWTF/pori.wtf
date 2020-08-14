@@ -1,5 +1,4 @@
-// custom typefaces
-import "typeface-montserrat"
-import "typeface-merriweather"
+import './custom.css'
 
-import "prismjs/themes/prism.css"
+import './src/utils/prism-material-oceanic.css'
+import 'gatsby-remark-mathjax-ssr/mathjax.css'
