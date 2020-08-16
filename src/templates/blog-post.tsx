@@ -14,7 +14,9 @@ import {
   Box,
   makeStyles,
   createStyles,
+  Theme,
 } from '@material-ui/core'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
 
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
 import { BlogPostBySlugQuery } from '../../types/graphql-types'
@@ -26,7 +28,7 @@ type BlogPostTemplate = {
 const BlogPostTemplate = (props: BlogPostTemplate) => {
   const classes = BlogPostTemplateStyles()
 
-  const post = props.data.markdownRemark
+  const post = props.data.mdx
   const siteTitle = props.data.site.siteMetadata.title
 
   return (
@@ -48,7 +50,7 @@ const BlogPostTemplate = (props: BlogPostTemplate) => {
             <Article
               title={post.frontmatter.title}
               description={post.frontmatter.description}
-              html={post.html}
+              body={post.body}
             />
           </Grid>
         </Grid>
@@ -79,10 +81,10 @@ export const pageQuery = graphql`
         title
       }
     }
-    markdownRemark(fields: { slug: { eq: $slug } }) {
-      id
-      excerpt(pruneLength: 160)
-      html
+    mdx(fields: { slug: { eq: $slug } }) {
+      body
+      excerpt(pruneLength: 120)
+      body
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")
@@ -95,7 +97,7 @@ export const pageQuery = graphql`
 type ArticleProps = {
   title: string
   description: string
-  html: string
+  body: string
 }
 
 const Article = (props: ArticleProps) => {
@@ -122,7 +124,7 @@ const Article = (props: ArticleProps) => {
             </Typography>
           </Grid>
           <Grid item xs>
-            <p dangerouslySetInnerHTML={{ __html: props.html }} />
+            <MDXRenderer>{props.body}</MDXRenderer>
           </Grid>
         </Grid>
       </CardContent>

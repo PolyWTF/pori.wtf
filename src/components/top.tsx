@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactEventHandler, MouseEventHandler } from 'react'
 import {
   Button,
   Typography,
@@ -7,7 +7,10 @@ import {
   IconButton,
   AppBar,
   Toolbar,
-  Icon,
+  Drawer as MaterialDrawer,
+  List,
+  ListItem,
+  ListItemProps,
 } from '@material-ui/core'
 import { navigate } from 'gatsby'
 import { DarkModeContext } from '../hooks/useDarkMode'
@@ -25,43 +28,45 @@ const TopStyles = makeStyles({
 })
 
 const Top = (props: TopProps) => {
+  const [drawerStatus, toggleDrawerStatus] = React.useState(false)
   const classes = TopStyles()
   return (
-    <AppBar
-      color="default"
-      position="sticky"
-      className={classes.appBar}
-      elevation={2}
-    >
-      <Toolbar>
-        <Grid
-          container
-          direction="row"
-          justify="space-between"
-          alignItems="flex-end"
-        >
-          <Grid item>
-            <IconButton edge="start">
-              <MenuIcon />
-            </IconButton>
-            <Button onClick={() => navigate('/')}>
-              <Typography variant="h6" component="h1">
-                {props.title}
-              </Typography>
-            </Button>
+    <>
+      <AppBar color="default" position="sticky" className={classes.appBar}>
+        <Toolbar>
+          <Grid
+            container
+            direction="row"
+            justify="space-between"
+            alignItems="flex-end"
+          >
+            <Grid item>
+              <IconButton
+                onClick={() => toggleDrawerStatus(!drawerStatus)}
+                edge="start"
+              >
+                <MenuIcon />
+              </IconButton>
+              <Button onClick={() => navigate('/')}>
+                <Typography variant="h6" component="h1">
+                  {props.title}
+                </Typography>
+              </Button>
+            </Grid>
+            <Grid item>
+              <RedirectIconButton to="https://twitter.com/poriWTF">
+                <TwitterIcon />
+              </RedirectIconButton>
+              <RedirectIconButton to="https://github.com/PolyWTF">
+                <GitHubIcon />
+              </RedirectIconButton>
+              <CanSwitchDarkModeButton />
+            </Grid>
           </Grid>
-          <Grid item>
-            <RedirectIconButton to="https://twitter.com/poriWTF">
-              <TwitterIcon />
-            </RedirectIconButton>
-            <RedirectIconButton to="https://github.com/PolyWTF">
-              <GitHubIcon />
-            </RedirectIconButton>
-            <CanSwitchDarkModeButton />
-          </Grid>
-        </Grid>
-      </Toolbar>
-    </AppBar>
+        </Toolbar>
+      </AppBar>
+      {/* <Drawer open={drawerStatus} /> */}
+    </>
   )
 }
 
@@ -89,6 +94,31 @@ const CanSwitchDarkModeButton = () => {
       {type ? <Brightness7Icon /> : <Brightness4Icon />}
     </IconButton>
   )
+}
+
+type DrawerProps = {
+  open: boolean
+}
+
+const Drawer = (props: DrawerProps) => {
+  function onClickHandler(path: string) {
+    navigate(`/${path}`)
+  }
+  return (
+    <MaterialDrawer open={props.open} variant="permanent" anchor="left">
+      <List>
+        {['about', 'contact'].map((path, index) => (
+          <ListItem key={index} onClick={() => onClickHandler(path)}>
+            {toUpperCamelCase(path)}
+          </ListItem>
+        ))}
+      </List>
+    </MaterialDrawer>
+  )
+}
+
+function toUpperCamelCase(text: string) {
+  return `${text.charAt(0).toUpperCase()}${text.substring(1)}`
 }
 
 export default Top

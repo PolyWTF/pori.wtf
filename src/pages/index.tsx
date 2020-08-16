@@ -1,5 +1,5 @@
 import React from 'react'
-import { navigate, Link, useStaticQuery, graphql } from 'gatsby'
+import { navigate, useStaticQuery, graphql, Link } from 'gatsby'
 
 import Layout from '../components/layout'
 import SEO from '../components/seo'
@@ -32,7 +32,7 @@ const BlogIndex: React.FC<{
           title
         }
       }
-      allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+      allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
         edges {
           node {
             fields {
@@ -43,7 +43,7 @@ const BlogIndex: React.FC<{
               title
               description
             }
-            excerpt(truncate: true, pruneLength: 180)
+            excerpt(truncate: true, pruneLength: 160)
           }
         }
       }
@@ -51,7 +51,7 @@ const BlogIndex: React.FC<{
   `)
 
   const siteTitle = data.site.siteMetadata.title
-  const posts = data.allMarkdownRemark.edges
+  const posts = data.allMdx.edges
 
   return (
     <Layout title={siteTitle}>
@@ -85,48 +85,33 @@ const BlogIndex: React.FC<{
   )
 }
 
-const useArticleCardStyles = makeStyles({
-  linkArea: {
-    marginTop: '8px',
-  },
-  link: {
-    fontFamily: 'Noto Sans JP',
-  },
-})
-
 export default BlogIndex
 
 const ArticleLinkCard = (props: ArticleLinkCardProps) => {
-  const [elevation, setElevation] = React.useState<1 | 4>(1)
-  const classes = useArticleCardStyles()
+  const [elevation, setElevation] = React.useState<1 | 8>(1)
   return (
     <Card
       elevation={elevation}
-      onMouseEnter={() => setElevation(4)}
+      onMouseEnter={() => setElevation(8)}
       onMouseLeave={() => setElevation(1)}
     >
-      <CardContent>
-        <Grid container>
-          <Grid item>
-            <CardActionArea onClick={() => navigate(props.slug)}>
+      <CardActionArea onClick={() => navigate(props.slug)}>
+        <CardContent>
+          <Grid container spacing={2}>
+            <Grid item>
               <Typography variant="h5" component="h2">
                 {props.title}
               </Typography>
-              <Typography color="textSecondary">{props.excerpt}</Typography>
-            </CardActionArea>
-          </Grid>
-          <Grid container item justify="space-between" alignItems="flex-end">
-            <Grid item>
-              <Link to={props.slug} className={classes.link}>
-                続きを読む
-              </Link>
+              <Typography color="textSecondary" component="p">
+                {props.date}
+              </Typography>
             </Grid>
             <Grid item>
-              <Typography color="textSecondary">{props.date}</Typography>
+              <Typography variant="body1">{props.excerpt}</Typography>
             </Grid>
           </Grid>
-        </Grid>
-      </CardContent>
+        </CardContent>
+      </CardActionArea>
     </Card>
   )
 }

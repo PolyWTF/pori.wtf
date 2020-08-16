@@ -1,0 +1,53 @@
+---
+title: GatsbyのマークダウンをMDXを使ってJSXのコンポーネントで置き換える方法
+date: 2020-08-16 18:37:19
+discription: MDXで解決
+---
+
+GatsbyではパースされたMarkdownはh1やpなどの普通のhtmlとなっているため
+material-uiとの相性が悪くレイアウトが崩れる問題が発生していた。  
+そこでMDXの`defaultLayout`を使ってMarkdownをmaterial-uiのコンポーネントに置き換える。
+なおMDXをGatsbyに導入する方法については[こちら](https://pori.wtf/introduction-of-MDX/)でまとめている。  
+
+## 設定
+```javascript
+{
+      resolve: 'gatsby-plugin-mdx',
+      options: {
+        extensions: [`.md`, `.mdx`],
+        defaultLayout: {
+          default: require.resolve('./src/markdownLayout.tsx')
+        }
+      }
+}
+```
+デフォルトのMarkdownのレイアウトを'./src/markdownLayout.tsx'から読み込むようにしておく
+
+## Markdownのレイアウト
+```tsx
+import React from 'react'
+// import { MDXProvider } from '@mdx-js/react'
+import { Typography } from '@material-ui/core'
+
+const defaultLayout = ({ children }: { children: JSX.Element }) => (
+  /* <MDXProvider
+    components={{
+      h1: H1,
+      h2: H2,
+      h3: H3,
+      p: P,
+    }}
+  >
+    {children}
+  </MDXProvider> */
+)
+const H1 = ({ children }: componentProps) => (
+  <Typography variant="h3" component="h1">
+    {children}
+  </Typography>
+)
+// H2, H3...
+```
+MDXProviderのcomponentsにコンポーネントを指定する
+
+これでMarkdownをコンポーネントに置き換えることができた

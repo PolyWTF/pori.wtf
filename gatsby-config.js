@@ -27,9 +27,13 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-transformer-remark',
+      resolve: 'gatsby-plugin-mdx',
       options: {
-        plugins: [
+        extensions: [`.md`, `.mdx`],
+        defaultLayout: {
+          default: require.resolve('./src/components/markdownLayout.tsx'),
+        },
+        gatsbyRemarkPlugins: [
           {
             resolve: 'gatsby-remark-images',
             options: {
@@ -68,12 +72,12 @@ module.exports = {
       },
     },
     'gatsby-plugin-react-helmet',
-    {
+    /* {
       resolve: 'gatsby-plugin-typography',
       options: {
         pathToConfigModule: 'src/utils/typography',
       },
-    },
+    },*/
     {
       resolve: 'gatsby-plugin-typescript',
       isTSX: true,

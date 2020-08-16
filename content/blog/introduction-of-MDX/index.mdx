@@ -1,0 +1,76 @@
+---
+title: GatsbyにMDXを導入する&詰まったところ解説
+date: 2020-08-16 00:32:41
+description: MDXとは？Markdownの中にjsxを直接書くことのできる.mdの拡張。他のUIライブラリーや.mdxファイルから直接インポートもすることができる。今回はこのMDXをGatsbyで使えるようにしてみる
+---
+## MDXとは？
+Markdownの中にjsxを直接書くことのできる.mdの拡張。
+他のUIライブラリーや.mdxファイルから直接インポートもすることができる
+```md
+Markdown!!!
+<HelloWorld />
+```
+今回はこのMDXをGatsbyで使えるようにしてみる
+
+## インストール
+`yarn add gatsby-plugin-mdx @mdx-js/mdx @mdx-js/react`
+.mdのファイルを.mdxに変更しておく
+## 設定諸々
+```javascript
+module.exports = {
+  plugins: [
+    // ....
+    `gatsby-plugin-mdx`,
+  ],
+}
+```
+gatsby.config.jsonに追記
+拡張子を変更しておく
+
+これで動くと思ったが.MDXで書いた記事のみが認識されず、トップページに表示されなかった。
+
+どうやら既にgatsby-transformer-remarkを利用している場合は
+gatsby-transformer-remarkをgatsby-plugin-mdxに置き換える必要があるらしい
+
+```json
+{
+    resolve: `gatsby-plugin-mdx`,
+    options: {
+      extensions: [`.md`, `.mdx`], //mdとmdxどちらも受け入れる
+      gatsbyRemarkPlugins: [] //pluginsはgatsbyRemarkPluginsに変える
+    },
+},
+```
+
+## gatsby-transformer-remarkからの移行
+
+そして、graphqlのqueryが`allMarkdownRemark`は`allMdx`、`MarkdownRemark`は`mdx`に変更される
+そのためgatsby.node.jsも変更する
+
+また、MDXでは記事の内容が保存されているプロパティが.htmlではなく.bodyに変更されている  
+さらに内容を表示するには`<MDXRenderer />`でラップしなければならない
+```jsx
+import { MDXRenderer } from "gatsby-plugin-mdx"
+
+const posts = graphql`
+  mdx(fields: { slug: { eq: $slug } }) {
+      body //html -> body
+      excerpt(pruneLength: 160)
+      frontmatter {
+        title
+        date(formatString: "MMMM DD, YYYY")
+        description
+      }
+    }
+`
+<Grid item xs>
+  <p>
+    <<MDXRenderer>
+      {posts.body}
+    </MDXRenderer>
+  </p>
+</Grid>
+```
+
+VsCodeのシンタックスハイライトを利用するために[拡張機能](https://marketplace.visualstudio.com/items?itemName=silvenon.mdx)を入れておく
+
