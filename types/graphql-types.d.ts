@@ -697,7 +697,6 @@ export type FileFieldsEnum =
   | 'childMdx___frontmatter___title'
   | 'childMdx___frontmatter___date'
   | 'childMdx___frontmatter___description'
-  | 'childMdx___frontmatter___discription'
   | 'childMdx___slug'
   | 'childMdx___body'
   | 'childMdx___excerpt'
@@ -1440,7 +1439,6 @@ export type MdxFieldsEnum =
   | 'frontmatter___title'
   | 'frontmatter___date'
   | 'frontmatter___description'
-  | 'frontmatter___discription'
   | 'slug'
   | 'body'
   | 'excerpt'
@@ -1570,7 +1568,6 @@ export type MdxFrontmatter = {
   title: Scalars['String'];
   date?: Maybe<Scalars['Date']>;
   description?: Maybe<Scalars['String']>;
-  discription?: Maybe<Scalars['String']>;
 };
 
 
@@ -1585,7 +1582,6 @@ export type MdxFrontmatterFilterInput = {
   title?: Maybe<StringQueryOperatorInput>;
   date?: Maybe<DateQueryOperatorInput>;
   description?: Maybe<StringQueryOperatorInput>;
-  discription?: Maybe<StringQueryOperatorInput>;
 };
 
 export type MdxGroupConnection = {
