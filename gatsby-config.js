@@ -101,7 +101,7 @@ module.exports = {
       resolve: 'gatsby-plugin-layout',
       options: {
         component: require.resolve(
-          './src/plugins/gatsby-plugin-layout/TopLayout.tsx'
+          './src/plugins/gatsby-plugin-layout/topLayout.tsx'
         ),
       },
     },

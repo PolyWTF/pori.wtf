@@ -54,8 +54,6 @@ pre > code[class*='language-'] {
 }
 
 pre[class*='language-'] {
-  min-width: 100px;
-  max-width: 800;
   overflow: auto;
   position: relative;
   color: #c3cee3;
@@ -224,9 +222,4 @@ pre[class*='language-'].language-scss > code {
 
 .token.variable {
   color: #f07178;
-}
-
-.gatsby-highlight {
-  min-width: 100px;
-  max-width: 800px;
 }
