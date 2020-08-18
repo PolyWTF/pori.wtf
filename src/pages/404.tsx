@@ -4,7 +4,12 @@ import { graphql } from 'gatsby'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 
-const NotFoundPage = ({ data, location }) => {
+type NotFoundPageProps = {
+  data: pageQuery
+  location: string
+}
+
+const NotFoundPage = ({ data, location }: NotFoundPageProps) => {
   const siteTitle = data.site.siteMetadata.title
 
   return (
@@ -19,7 +24,7 @@ const NotFoundPage = ({ data, location }) => {
 export default NotFoundPage
 
 export const pageQuery = graphql`
-  query {
+  query page {
     site {
       siteMetadata {
         title

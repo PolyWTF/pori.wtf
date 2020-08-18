@@ -2952,37 +2952,6 @@ export type StringQueryOperatorInput = {
   glob?: Maybe<Scalars['String']>;
 };
 
-export type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_1_Query = { site?: Maybe<{ siteMetadata?: Maybe<(
-      Pick<SiteSiteMetadata, 'title' | 'description'>
-      & { social?: Maybe<Pick<SiteSiteMetadataSocial, 'twitter'>> }
-    )> }> };
-
-export type Unnamed_2_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_2_Query = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'title'>> }> };
-
-export type ArticleDataQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ArticleDataQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'title'>> }>, allMdx: { edges: Array<{ node: (
-        Pick<Mdx, 'excerpt'>
-        & { fields?: Maybe<Pick<MdxFields, 'slug'>>, frontmatter?: Maybe<Pick<MdxFrontmatter, 'date' | 'title' | 'description'>> }
-      ) }> } };
-
-export type BlogPostBySlugQueryVariables = Exact<{
-  slug: Scalars['String'];
-}>;
-
-
-export type BlogPostBySlugQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'title'>> }>, mdx?: Maybe<(
-    Pick<Mdx, 'body' | 'excerpt'>
-    & { frontmatter?: Maybe<Pick<MdxFrontmatter, 'title' | 'date' | 'description'>> }
-  )> };
-
 export type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
 export type GatsbyImageSharpFixed_TracedSvgFragment = Pick<ImageSharpFixed, 'tracedSVG' | 'width' | 'height' | 'src' | 'srcSet'>;
