@@ -23,6 +23,7 @@ material-uiとの相性が悪くレイアウトが崩れる問題が発生して
 デフォルトのMarkdownのレイアウトを'./src/markdownLayout.tsx'から読み込むようにしておく
 
 ## Markdownのレイアウト
+MDXProviderのcomponentsにコンポーネントを指定する
 ```tsx
 import React from 'react'
 // import { MDXProvider } from '@mdx-js/react'
@@ -47,6 +48,5 @@ const H1 = ({ children }: componentProps) => (
 )
 // H2, H3...
 ```
-MDXProviderのcomponentsにコンポーネントを指定する
 
 これでMarkdownをコンポーネントに置き換えることができた

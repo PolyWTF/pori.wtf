@@ -1,3 +1,21 @@
 html {
   overflow-x: hidden;
 }
+
+
+pre {
+  padding: 12px;
+  margin: 0;
+  border-radius: 4px;
+  overflow-x: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+pre::-webkit-scrollbar {
+  display: none;
+}
+
+code > span {
+  font-family: 'Noto Sans JP';
+}

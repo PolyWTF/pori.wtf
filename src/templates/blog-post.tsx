@@ -1,5 +1,5 @@
 import React from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
+import { graphql } from 'gatsby'
 
 import Layout from '../components/layout'
 import SEO from '../components/seo'
@@ -13,8 +13,7 @@ import {
   Zoom,
   Box,
   makeStyles,
-  createStyles,
-  Theme,
+  Container,
 } from '@material-ui/core'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 
@@ -26,8 +25,6 @@ type BlogPostTemplate = {
 }
 
 const BlogPostTemplate = (props: BlogPostTemplate) => {
-  const classes = BlogPostTemplateStyles()
-
   const post = props.data.mdx
   const siteTitle = props.data.site.siteMetadata.title
 
@@ -38,22 +35,13 @@ const BlogPostTemplate = (props: BlogPostTemplate) => {
           title={post.frontmatter.title}
           description={post.frontmatter.description || post.excerpt}
         />
-        <Grid
-          container
-          spacing={0}
-          direction="column"
-          justify="center"
-          alignItems="center"
-          className={classes.containerGrid}
-        >
-          <Grid item lg={5}>
-            <Article
-              title={post.frontmatter.title}
-              description={post.frontmatter.description}
-              body={post.body}
-            />
-          </Grid>
-        </Grid>
+        <Container maxWidth="md">
+          <Article
+            title={post.frontmatter.title}
+            description={post.frontmatter.description}
+            body={post.body}
+          />
+        </Container>
       </Layout>
       <ScrollToTop>
         <Fab color="secondary" size="small" aria-label="scroll back to top">
@@ -63,14 +51,6 @@ const BlogPostTemplate = (props: BlogPostTemplate) => {
     </>
   )
 }
-
-const BlogPostTemplateStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    containerGrid: {
-      marginBottom: theme.spacing(2),
-    },
-  })
-)
 
 export default BlogPostTemplate
 

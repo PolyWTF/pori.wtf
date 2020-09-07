@@ -20,7 +20,7 @@ type SEOProps = {
 const SEO = ({ description, lang, meta, title }: SEOProps) => {
   const { site } = useStaticQuery(
     graphql`
-      query {
+      query metaDataQuery {
         site {
           siteMetadata {
             title

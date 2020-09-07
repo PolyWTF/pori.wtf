@@ -9,11 +9,11 @@ type NotFoundPageProps = {
   location: string
 }
 
-const NotFoundPage = ({ data, location }: NotFoundPageProps) => {
+const NotFoundPage = ({ data }: NotFoundPageProps) => {
   const siteTitle = data.site.siteMetadata.title
 
   return (
-    <Layout location={location} title={siteTitle}>
+    <Layout title={siteTitle}>
       <SEO title="404: Not Found" />
       <h1>Not Found</h1>
       <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
