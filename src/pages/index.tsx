@@ -9,7 +9,6 @@ import {
   CardContent,
   Typography,
   Grid,
-  Button,
   CardActionArea,
 } from '@material-ui/core'
 import { ArticleDataQuery } from '../../types/graphql-types'
@@ -52,7 +51,6 @@ const BlogIndex: React.FC<{
 
   const siteTitle = data.site.siteMetadata.title
   const posts = data.allMdx.edges
-
   return (
     <Layout title={siteTitle}>
       <SEO title="All posts" />

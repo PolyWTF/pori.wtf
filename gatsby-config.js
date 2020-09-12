@@ -63,8 +63,8 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        name: 'Gatsby Starter Blog',
-        short_name: 'GatsbyJS',
+        name: 'poriWTF',
+        short_name: 'pori',
         start_url: '/',
         background_color: '#ffffff',
         theme_color: '#663399',
@@ -102,6 +102,7 @@ module.exports = {
       },
     },
     'gatsby-plugin-material-ui',
+    `gatsby-plugin-sitemap`,
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
